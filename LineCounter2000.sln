@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineCounter2000", "LineCounter2000\LineCounter2000.csproj", "{BDAEFB4A-BC77-4FA6-BA0F-BC1C175C47DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDAEFB4A-BC77-4FA6-BA0F-BC1C175C47DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAEFB4A-BC77-4FA6-BA0F-BC1C175C47DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAEFB4A-BC77-4FA6-BA0F-BC1C175C47DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAEFB4A-BC77-4FA6-BA0F-BC1C175C47DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
