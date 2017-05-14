@@ -23,7 +23,7 @@ namespace LineCounter2000
             if (file_dict.ContainsKey(path))
                 return false;  
 
-            TextFile f = new TextFile(path);
+            TextFile f = new TextFile(path,root_path);
             if (f.is_valid)
             {
                 file_dict.Add(path, f);

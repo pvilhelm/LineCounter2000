@@ -11,38 +11,75 @@ namespace LineCounter2000
 {
     public class CheckedFileList : CheckedListBox
     {
-
-        public string current_dir;
-
+        
         public CheckedFileList()
-        {
-            current_dir = Directory.GetCurrentDirectory();
-            UpdateList();
+        { 
         }
 
         
 
-        public void UpdateList()
+        public void UpdateList(string current_dir)
         {
             Items.Clear();
 
-            Items.Add("..", false); 
+            Items.Add(new ElementContainer(".."), false); 
+
             
+
+
             foreach (string i in Directory.EnumerateDirectories(current_dir))
             {
-                Match m = Regex.Match(i, @"^\w\:\\.*?(.+\\)$");
-                
-                Items.Add(m.Groups[1], false);
+                //Match m = Regex.Match(i, @"^\w\:\\\\.*?([^\\]+\\*)$");
+
+                Items.Add(new ElementContainer(i+@"\"), false);
             } 
             foreach (string i in Directory.EnumerateFiles(current_dir))
             {
-                Match m = Regex.Match(i, @".*\\(.+$)");
+                //Match m = Regex.Match(i, @"\\([^\\]+)$");
 
-                Items.Add(m.Groups[1], false);
+                Items.Add(new ElementContainer(i), false);
             }
  
         }
 
+        public class ElementContainer
+        {
+            public string path;
+            public ElementType type; 
 
+            public enum ElementType
+            {
+                FILE,
+                FOLDER
+            }
+
+            public ElementContainer(string path)
+            {
+                this.path = path;
+
+                if (Regex.IsMatch(path, @"\\$") | path.Equals(".."))//Is folder
+                {
+                    this.type = ElementType.FOLDER;
+                }
+                else
+                    this.type = ElementType.FILE; 
+
+            }
+
+            public override string ToString()
+            {
+                switch(path){
+                    case "..":
+                        return "..";
+                    case ".":
+                        return ".";
+                    default:
+                        Match m = Regex.Match(path, @"^\w\:\\\\.*?([^\\]+\\*)$");
+                        return m.Groups[1].ToString();
+                }
+            }
+        }
     }
+
+   
 }

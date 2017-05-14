@@ -11,6 +11,8 @@ namespace LineCounter2000
     class TextFile
     {
 
+        string project_path;
+
         public enum FileType
         {
             PROGRAM_TEXT,
@@ -26,8 +28,9 @@ namespace LineCounter2000
         public int nr_lines { get; set; }
         public int nr_used_lines { get; set; }
         
-        public TextFile(string path)
+        public TextFile(string path, string project_path)
         {
+            this.project_path = project_path;
             this.path = path;
             this.file_name = Path.GetFileName(path);
             this.file_ext = Path.GetExtension(path);
