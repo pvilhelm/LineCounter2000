@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace LineCounter2000
 {
-    class Session
+    public class Session
     {
-        Dictionary<string, Project> path_project_dict;
-        Dictionary<string, Project> file_project_dict;
+        public Dictionary<string, Project> path_project_dict;
+        public Dictionary<string, Project> file_project_dict;
 
         DateTime create_time;
         public string curr_dir; 
@@ -36,6 +36,22 @@ namespace LineCounter2000
             return true; 
         }
 
+        public bool removeFileFromProject(string file_path)
+        {
+            if (!file_project_dict.ContainsKey(file_path))
+            {
+                MessageBox.Show("File not in a project.");
+                return false;
+            }
+            else
+            {
+                Project project = this.file_project_dict[file_path];
+                project.file_dict.Remove(file_path);
+
+                return true; 
+            }
+        }
+
         public bool addFileToProject(string file_path)
         {
             if (file_project_dict.ContainsKey(file_path))
@@ -53,6 +69,7 @@ namespace LineCounter2000
                         return true; 
                     }
                 }
+                MessageBox.Show("No project in this file's path.");
             }
 
             return false; 

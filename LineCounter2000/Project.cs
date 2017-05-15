@@ -7,10 +7,10 @@ using System.IO;
 
 namespace LineCounter2000
 {
-    class Project
+    public class Project
     {
-        string root_path;
-        Dictionary<string, TextFile> file_dict;
+        public string root_path;
+        public Dictionary<string, TextFile> file_dict;
 
         public Project(string path)
         {

@@ -8,7 +8,7 @@ using System.IO;
 
 namespace LineCounter2000
 {
-    class TextFile
+    public class TextFile
     {
 
         string project_path;

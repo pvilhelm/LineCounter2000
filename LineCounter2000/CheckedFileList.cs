@@ -11,12 +11,16 @@ namespace LineCounter2000
 {
     public class CheckedFileList : CheckedListBox
     {
-        
+
+        public Session session = null;
+
         public CheckedFileList()
         { 
         }
 
-        
+        public void setSession(ref Session session) {
+            this.session = session;
+        }
 
         public void UpdateList(string current_dir)
         {
@@ -31,13 +35,29 @@ namespace LineCounter2000
             {
                 //Match m = Regex.Match(i, @"^\w\:\\\\.*?([^\\]+\\*)$");
 
-                Items.Add(new ElementContainer(i+@"\"), false);
+                if (session.path_project_dict.ContainsKey(i+@"\"))
+                {
+                    Items.Add(new ElementContainer(i + @"\",true), false);
+                }
+                else
+                {
+                    Items.Add(new ElementContainer(i + @"\"), false);
+                }
+
+                
             } 
             foreach (string i in Directory.EnumerateFiles(current_dir))
             {
                 //Match m = Regex.Match(i, @"\\([^\\]+)$");
 
-                Items.Add(new ElementContainer(i), false);
+                if (session.file_project_dict.ContainsKey(i))
+                {
+                    Items.Add(new ElementContainer(i), true);
+                }
+                else
+                {
+                    Items.Add(new ElementContainer(i), false);
+                }
             }
  
         }
@@ -50,19 +70,28 @@ namespace LineCounter2000
             public enum ElementType
             {
                 FILE,
-                FOLDER
+                FOLDER,
+                PROJECT_FOLDER
             }
 
-            public ElementContainer(string path)
+            public ElementContainer(string path) : this(path, false)
+            {
+                
+            }
+
+            public ElementContainer(string path, bool isProject)
             {
                 this.path = path;
 
                 if (Regex.IsMatch(path, @"\\$") | path.Equals(".."))//Is folder
                 {
-                    this.type = ElementType.FOLDER;
+                    if(isProject)
+                        this.type = ElementType.PROJECT_FOLDER;
+                    else
+                        this.type = ElementType.FOLDER;
                 }
                 else
-                    this.type = ElementType.FILE; 
+                    this.type = ElementType.FILE;
 
             }
 
@@ -75,11 +104,14 @@ namespace LineCounter2000
                         return ".";
                     default:
                         Match m = Regex.Match(path, @"^\w\:\\\\.*?([^\\]+\\*)$");
-                        return m.Groups[1].ToString();
+                        if(this.type == ElementType.PROJECT_FOLDER)
+                        {
+                            return "Project: "+m.Groups[1].ToString();
+                        }
+                        else
+                            return m.Groups[1].ToString();
                 }
             }
         }
     }
-
-   
 }

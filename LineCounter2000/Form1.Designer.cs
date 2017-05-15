@@ -34,14 +34,14 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.currentDirTextBox = new System.Windows.Forms.TextBox();
             this.openFolderButton = new System.Windows.Forms.Button();
+            this.checkedFileList = new LineCounter2000.CheckedFileList();
+            this.makeSelectedIntoProject = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.makeSelectedIntoProject = new System.Windows.Forms.Button();
-            this.checkedFileList = new LineCounter2000.CheckedFileList();
+            this.totUsedLinesTable = new System.Windows.Forms.Label();
+            this.totLinesLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -55,18 +55,16 @@
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(690, 684);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1035, 1052);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.flowLayoutPanel2);
-            this.panel1.Location = new System.Drawing.Point(2, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(320, 640);
+            this.panel1.Size = new System.Drawing.Size(480, 985);
             this.panel1.TabIndex = 3;
             // 
             // flowLayoutPanel2
@@ -75,19 +73,19 @@
             this.flowLayoutPanel2.Controls.Add(this.openFolderButton);
             this.flowLayoutPanel2.Controls.Add(this.checkedFileList);
             this.flowLayoutPanel2.Controls.Add(this.makeSelectedIntoProject);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(320, 640);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(480, 985);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // currentDirTextBox
             // 
-            this.currentDirTextBox.Location = new System.Drawing.Point(2, 2);
-            this.currentDirTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.currentDirTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.currentDirTextBox.Location = new System.Drawing.Point(3, 3);
             this.currentDirTextBox.Name = "currentDirTextBox";
-            this.currentDirTextBox.Size = new System.Drawing.Size(208, 20);
+            this.currentDirTextBox.Size = new System.Drawing.Size(310, 26);
             this.currentDirTextBox.TabIndex = 1;
             this.currentDirTextBox.Text = "c://";
             this.currentDirTextBox.TextChanged += new System.EventHandler(this.currentDirTextBox_TextChanged);
@@ -95,97 +93,17 @@
             // 
             // openFolderButton
             // 
-            this.openFolderButton.Location = new System.Drawing.Point(214, 2);
-            this.openFolderButton.Margin = new System.Windows.Forms.Padding(2);
+            this.openFolderButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openFolderButton.Location = new System.Drawing.Point(319, 3);
             this.openFolderButton.Name = "openFolderButton";
-            this.openFolderButton.Size = new System.Drawing.Size(56, 20);
+            this.openFolderButton.Size = new System.Drawing.Size(84, 31);
             this.openFolderButton.TabIndex = 2;
             this.openFolderButton.Text = "Browse";
             this.openFolderButton.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.tableLayoutPanel1);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(327, 3);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(351, 638);
-            this.flowLayoutPanel3.TabIndex = 4;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(348, 67);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 33);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Total lines:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(177, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(168, 34);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "totUsedLinesTable";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(168, 34);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Total used lines:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(177, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(168, 33);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "totLinesLabel";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // makeSelectedIntoProject
-            // 
-            this.makeSelectedIntoProject.Location = new System.Drawing.Point(3, 440);
-            this.makeSelectedIntoProject.Name = "makeSelectedIntoProject";
-            this.makeSelectedIntoProject.Size = new System.Drawing.Size(314, 23);
-            this.makeSelectedIntoProject.TabIndex = 3;
-            this.makeSelectedIntoProject.Text = "Make selected into project";
-            this.makeSelectedIntoProject.UseVisualStyleBackColor = true;
-            this.makeSelectedIntoProject.Click += new System.EventHandler(this.makeSelectedIntoProject_Click);
-            // 
             // checkedFileList
             // 
+            this.checkedFileList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkedFileList.FormattingEnabled = true;
             this.checkedFileList.Items.AddRange(new object[] {
             "..",
@@ -519,22 +437,111 @@
             ((object)(resources.GetObject("checkedFileList.Items327"))),
             ((object)(resources.GetObject("checkedFileList.Items328"))),
             ".."});
-            this.checkedFileList.Location = new System.Drawing.Point(2, 26);
-            this.checkedFileList.Margin = new System.Windows.Forms.Padding(2);
-            this.checkedFileList.MinimumSize = new System.Drawing.Size(268, 326);
+            this.checkedFileList.Location = new System.Drawing.Point(0, 37);
+            this.checkedFileList.Margin = new System.Windows.Forms.Padding(0);
+            this.checkedFileList.MinimumSize = new System.Drawing.Size(400, 499);
             this.checkedFileList.Name = "checkedFileList";
             this.checkedFileList.ScrollAlwaysVisible = true;
-            this.checkedFileList.Size = new System.Drawing.Size(316, 409);
+            this.checkedFileList.Size = new System.Drawing.Size(472, 499);
             this.checkedFileList.TabIndex = 0;
             this.checkedFileList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedFileList_ItemCheck);
+            this.checkedFileList.SelectedIndexChanged += new System.EventHandler(this.checkedFileList_SelectedIndexChanged);
+            this.checkedFileList.DoubleClick += new System.EventHandler(this.checkedFileList_DoubleClick);
+            // 
+            // makeSelectedIntoProject
+            // 
+            this.makeSelectedIntoProject.Location = new System.Drawing.Point(4, 541);
+            this.makeSelectedIntoProject.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.makeSelectedIntoProject.Name = "makeSelectedIntoProject";
+            this.makeSelectedIntoProject.Size = new System.Drawing.Size(471, 35);
+            this.makeSelectedIntoProject.TabIndex = 3;
+            this.makeSelectedIntoProject.Text = "Make selected into project";
+            this.makeSelectedIntoProject.UseVisualStyleBackColor = true;
+            this.makeSelectedIntoProject.Click += new System.EventHandler(this.makeSelectedIntoProject_Click);
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.tableLayoutPanel1);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(490, 5);
+            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(526, 981);
+            this.flowLayoutPanel3.TabIndex = 4;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.totUsedLinesTable, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.totLinesLabel, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 5);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(522, 103);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(4, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(253, 51);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Total lines:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(4, 51);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(253, 52);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Total used lines:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totUsedLinesTable
+            // 
+            this.totUsedLinesTable.AutoSize = true;
+            this.totUsedLinesTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totUsedLinesTable.Location = new System.Drawing.Point(265, 51);
+            this.totUsedLinesTable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.totUsedLinesTable.Name = "totUsedLinesTable";
+            this.totUsedLinesTable.Size = new System.Drawing.Size(253, 52);
+            this.totUsedLinesTable.TabIndex = 1;
+            this.totUsedLinesTable.Text = "-";
+            this.totUsedLinesTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totLinesLabel
+            // 
+            this.totLinesLabel.AutoSize = true;
+            this.totLinesLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totLinesLabel.Location = new System.Drawing.Point(265, 0);
+            this.totLinesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.totLinesLabel.Name = "totLinesLabel";
+            this.totLinesLabel.Size = new System.Drawing.Size(253, 51);
+            this.totLinesLabel.TabIndex = 2;
+            this.totLinesLabel.Text = "-";
+            this.totLinesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 684);
+            this.ClientSize = new System.Drawing.Size(1035, 1052);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -560,8 +567,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label totUsedLinesTable;
+        private System.Windows.Forms.Label totLinesLabel;
         private System.Windows.Forms.Button makeSelectedIntoProject;
     }
 }
