@@ -118,34 +118,39 @@ namespace LineCounter2000
             updateLabels();
         }
 
-        private void checkedFileList_DoubleClick(object sender, EventArgs e)
+        
+
+        private void checkedFileList_KeyPress(object sender, KeyPressEventArgs e)
         {
-            CheckedFileList chfl = (CheckedFileList)sender;
-
-            CheckedFileList.ElementContainer ec = (CheckedFileList.ElementContainer)chfl.SelectedItem;
-
-            if (ec == null)
-                return;
-
-            if (ec.type != CheckedFileList.ElementContainer.ElementType.FILE)
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                string path = ec.path;
+                CheckedFileList chfl = (CheckedFileList)sender;
 
-                if(path == "..")
+                CheckedFileList.ElementContainer ec = (CheckedFileList.ElementContainer)chfl.SelectedItem;
+
+                if (ec == null)
+                    return;
+
+                if (ec.type != CheckedFileList.ElementContainer.ElementType.FILE)
                 {
-                    path = session.curr_dir;
-                    Match m = Regex.Match(path, @"((\w:\\\\(.+\\)*)(.*\\))|(\w:\\\\)");
-                    if (m.Groups[2].Length != 0)
-                        session.curr_dir = m.Groups[2].ToString();//parent folder
+                    string path = ec.path;
+
+                    if (path == "..")
+                    {
+                        path = session.curr_dir;
+                        Match m = Regex.Match(path, @"((\w:\\\\(.+\\)*)(.*\\))|(\w:\\\\)");
+                        if (m.Groups[2].Length != 0)
+                            session.curr_dir = m.Groups[2].ToString();//parent folder
+                        else
+                            session.curr_dir = m.Groups[5].ToString();//root level (stay put)
+
+                    }
                     else
-                        session.curr_dir = m.Groups[5].ToString();//root level (stay put)
-
+                    {
+                        session.curr_dir = path;
+                    }
+                    updateStates();
                 }
-                else
-                {
-                    session.curr_dir = path;
-                }
-                updateStates();
             }
         }
     }

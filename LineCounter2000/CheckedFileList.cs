@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace LineCounter2000
 {
-    public class CheckedFileList : CheckedListBox
+    public class CheckedFileList : ListBox
     {
 
         public Session session = null;
@@ -24,9 +24,21 @@ namespace LineCounter2000
 
         public void UpdateList(string current_dir)
         {
+
+            try
+            {
+                IEnumerable<string> t = Directory.EnumerateDirectories(current_dir);
+
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("You don't have the rights to access this folder.");
+                return;
+            }
+
             Items.Clear();
 
-            Items.Add(new ElementContainer(".."), false); 
+            Items.Add(new ElementContainer("..")); 
 
             
 
@@ -37,11 +49,11 @@ namespace LineCounter2000
 
                 if (session.path_project_dict.ContainsKey(i+@"\"))
                 {
-                    Items.Add(new ElementContainer(i + @"\",true), false);
+                    Items.Add(new ElementContainer(i + @"\",true));
                 }
                 else
                 {
-                    Items.Add(new ElementContainer(i + @"\"), false);
+                    Items.Add(new ElementContainer(i + @"\"));
                 }
 
                 
@@ -52,11 +64,11 @@ namespace LineCounter2000
 
                 if (session.file_project_dict.ContainsKey(i))
                 {
-                    Items.Add(new ElementContainer(i), true);
+                    Items.Add(new ElementContainer(i));
                 }
                 else
                 {
-                    Items.Add(new ElementContainer(i), false);
+                    Items.Add(new ElementContainer(i));
                 }
             }
  
