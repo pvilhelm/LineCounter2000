@@ -76,8 +76,6 @@ namespace LineCounter2000
             else
                 no_recursion_checkedFileList_ItemCheck = true;
 
-
-
             int i = e.Index;
             CheckedFileList cfl = this.checkedFileList;
             CheckedFileList.ElementContainer s = (CheckedFileList.ElementContainer)cfl.Items[i];
@@ -122,16 +120,19 @@ namespace LineCounter2000
 
         private void checkedFileList_KeyPress(object sender, KeyPressEventArgs e)
         {
+            CheckedFileList chfl = (CheckedFileList)sender;
+
+            CheckedFileList.ElementContainer ec = (CheckedFileList.ElementContainer)chfl.SelectedItem;
+
+            if (ec == null)
+                return;
+
+
             if (e.KeyChar == (char)Keys.Enter)
             {
-                CheckedFileList chfl = (CheckedFileList)sender;
+                
 
-                CheckedFileList.ElementContainer ec = (CheckedFileList.ElementContainer)chfl.SelectedItem;
-
-                if (ec == null)
-                    return;
-
-                if (ec.type != CheckedFileList.ElementContainer.ElementType.FILE)
+                if (ec.type == CheckedFileList.ElementContainer.ElementType.FOLDER || ec.type == CheckedFileList.ElementContainer.ElementType.PROJECT_FOLDER)
                 {
                     string path = ec.path;
 
@@ -148,6 +149,40 @@ namespace LineCounter2000
                     else
                     {
                         session.curr_dir = path;
+                    }
+                    updateStates();
+                }
+            }
+            else if(e.KeyChar == 'e' || e.KeyChar == 'E')
+            {
+                if (ec.type == CheckedFileList.ElementContainer.ElementType.FILE)
+                {
+                    string path = ec.path;
+
+                    if (path == "..")
+                    {
+                        return; //dont select ".." (parent folder)
+                    }
+                    else
+                    {
+                        session.addFileToProject(path);
+                    }
+                    updateStates();
+                }
+            }
+            else if (e.KeyChar == 'q' || e.KeyChar == 'Q')
+            {
+                if (ec.type == CheckedFileList.ElementContainer.ElementType.INCLUDED_FILE)
+                {
+                    string path = ec.path;
+
+                    if (path == "..")
+                    {
+                        return; //dont select ".." (parent folder)
+                    }
+                    else
+                    {
+                        session.removeFileFromProject(path);
                     }
                     updateStates();
                 }

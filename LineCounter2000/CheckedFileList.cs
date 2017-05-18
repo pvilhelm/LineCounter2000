@@ -36,6 +36,8 @@ namespace LineCounter2000
                 return;
             }
 
+            int index_old = this.SelectedIndex;
+
             Items.Clear();
 
             Items.Add(new ElementContainer("..")); 
@@ -64,14 +66,22 @@ namespace LineCounter2000
 
                 if (session.file_project_dict.ContainsKey(i))
                 {
-                    Items.Add(new ElementContainer(i));
+                    Items.Add(new ElementContainer(i,false,true));
                 }
                 else
                 {
                     Items.Add(new ElementContainer(i));
                 }
             }
- 
+
+            try
+            {
+                this.SetSelected(index_old, true);
+            }
+            catch(Exception e)
+            {
+                this.SetSelected(0,true);
+            }
         }
 
         public class ElementContainer
@@ -81,9 +91,10 @@ namespace LineCounter2000
 
             public enum ElementType
             {
-                FILE,
-                FOLDER,
-                PROJECT_FOLDER
+                FILE = 2,
+                INCLUDED_FILE = 3,
+                FOLDER = 4,
+                PROJECT_FOLDER = 5
             }
 
             public ElementContainer(string path) : this(path, false)
@@ -91,19 +102,29 @@ namespace LineCounter2000
                 
             }
 
-            public ElementContainer(string path, bool isProject)
+            public ElementContainer(string path, bool isProject) : this(path, isProject, false)
+            {
+                
+            }
+
+            public ElementContainer(string path, bool isProject, bool isSelected)
             {
                 this.path = path;
 
                 if (Regex.IsMatch(path, @"\\$") | path.Equals(".."))//Is folder
                 {
-                    if(isProject)
+                    if (isProject)
                         this.type = ElementType.PROJECT_FOLDER;
                     else
                         this.type = ElementType.FOLDER;
                 }
                 else
-                    this.type = ElementType.FILE;
+                {
+                    if (isSelected)
+                        this.type = ElementType.INCLUDED_FILE;
+                    else
+                        this.type = ElementType.FILE;
+                }
 
             }
 
@@ -116,12 +137,27 @@ namespace LineCounter2000
                         return ".";
                     default:
                         Match m = Regex.Match(path, @"^\w\:\\\\.*?([^\\]+\\*)$");
-                        if(this.type == ElementType.PROJECT_FOLDER)
+                        if (this.type == ElementType.PROJECT_FOLDER)
                         {
-                            return "Project: "+m.Groups[1].ToString();
+                            return "Project: " + m.Groups[1].ToString();
+                        }
+                        else if(this.type == ElementType.INCLUDED_FILE)
+                        {
+                            return "* "+m.Groups[1].ToString();
+                        }
+                        else if(this.type == ElementType.FILE)
+                        {
+                            return m.Groups[1].ToString();
+                        }
+                        else if(this.type == ElementType.FOLDER)
+                        {
+                            return m.Groups[1].ToString();
                         }
                         else
-                            return m.Groups[1].ToString();
+                        {
+                            throw new Exception("Invalid ElementType");
+
+                        }
                 }
             }
         }

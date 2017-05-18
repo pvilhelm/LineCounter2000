@@ -47,6 +47,7 @@ namespace LineCounter2000
             {
                 Project project = this.file_project_dict[file_path];
                 project.file_dict.Remove(file_path);
+                this.file_project_dict.Remove(file_path);
 
                 return true; 
             }
