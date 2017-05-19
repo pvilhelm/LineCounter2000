@@ -37,6 +37,7 @@ namespace LineCounter2000
             }
 
             int index_old = this.SelectedIndex;
+            
 
             Items.Clear();
 
@@ -82,6 +83,11 @@ namespace LineCounter2000
             {
                 this.SetSelected(0,true);
             }
+
+            
+            
+
+
         }
 
         public class ElementContainer

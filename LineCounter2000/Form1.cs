@@ -53,7 +53,12 @@ namespace LineCounter2000
 
         private void makeSelectedIntoProject_Click(object sender, EventArgs e)
         {
-            CheckedFileList.ElementContainer s =(CheckedFileList.ElementContainer)this.checkedFileList.SelectedItem;
+            fn_makeSelectedIntoProject();
+        }
+
+        private void fn_makeSelectedIntoProject()
+        {
+            CheckedFileList.ElementContainer s = (CheckedFileList.ElementContainer)this.checkedFileList.SelectedItem;
             if (s.type == CheckedFileList.ElementContainer.ElementType.FOLDER)
             {
                 session.addProject(s.path);
@@ -63,7 +68,6 @@ namespace LineCounter2000
             {
                 MessageBox.Show("Selected item is not a folder");
             }
-
         }
 
         bool no_recursion_checkedFileList_ItemCheck = false;
@@ -108,6 +112,7 @@ namespace LineCounter2000
             this.totLinesLabel.Text = tot_lines.ToString();
             this.totUsedLinesTable.Text = tot_used_lines.ToString();
             this.currentDirTextBox.Text = session.curr_dir;
+            this.sessionTextBox.Text = session.getTextRepresentation();
         }
 
         private void updateStates()
@@ -115,8 +120,6 @@ namespace LineCounter2000
             this.checkedFileList.UpdateList(session.curr_dir);
             updateLabels();
         }
-
-        
 
         private void checkedFileList_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -141,7 +144,11 @@ namespace LineCounter2000
                         path = session.curr_dir;
                         Match m = Regex.Match(path, @"((\w:\\\\(.+\\)*)(.*\\))|(\w:\\\\)");
                         if (m.Groups[2].Length != 0)
+                        {
                             session.curr_dir = m.Groups[2].ToString();//parent folder
+                            chfl.ClearSelected();
+                            chfl.SetSelected(0, true);
+                        }
                         else
                             session.curr_dir = m.Groups[5].ToString();//root level (stay put)
 
@@ -149,9 +156,15 @@ namespace LineCounter2000
                     else
                     {
                         session.curr_dir = path;
+                        chfl.ClearSelected();
+                        chfl.SetSelected(0, true);
                     }
                     updateStates();
                 }
+            }
+            else if(e.KeyChar == 'w' || e.KeyChar == 'W')
+            {
+                fn_makeSelectedIntoProject();
             }
             else if(e.KeyChar == 'e' || e.KeyChar == 'E')
             {

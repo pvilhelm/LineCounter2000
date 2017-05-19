@@ -28,7 +28,17 @@ namespace LineCounter2000
         {
             if (path_project_dict.ContainsKey(path))
             {
+                MessageBox.Show("Folder is allready a project.");
                 return false; 
+            }
+
+            foreach(KeyValuePair<string,Project> kv in path_project_dict)
+            {
+                if (path.Contains(kv.Key))
+                {
+                    MessageBox.Show("Selected folder allready part of project: " + kv.Key);
+                    return false; 
+                }
             }
 
             Project p = new Project(path);
@@ -94,6 +104,21 @@ namespace LineCounter2000
                 tot_lines += p.Value.getTotUsedLines();
             }
             return tot_lines;
+        }
+
+        public string getTextRepresentation()
+        {
+            StringBuilder strbld = new StringBuilder();
+
+            strbld.AppendLine("Session has:");
+            strbld.AppendLine("\tTotal lines:           " + getTotLines());
+            strbld.AppendLine("\tTotal non-blank lines: " + getTotUsedLines());
+            strbld.AppendLine("Added projects are:");
+            foreach(KeyValuePair<string,Project> kv in path_project_dict)
+            {
+                strbld.AppendLine("\t"+kv.Value.getTotUsedLines()+"/"+kv.Value.getTotLines()+ " " + kv.Key);
+            }
+            return strbld.ToString();
         }
 
     }
